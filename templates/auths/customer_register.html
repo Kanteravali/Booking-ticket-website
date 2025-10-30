@@ -3,26 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Customer Registration</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+            --border-color: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        
+        .registration-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .error-message {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--error-color);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--error-color);
+        }
+        
+        .password-strength {
+            margin-top: 5px;
+            font-size: 14px;
+            height: 20px;
+        }
+        
+        .strength-weak {
+            color: var(--error-color);
+        }
+        
+        .strength-medium {
+            color: #f39c12;
+        }
+        
+        .strength-strong {
+            color: var(--success-color);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+        
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .field-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .field-row .form-group {
+            flex: 1;
+        }
+        
+        @media (max-width: 576px) {
+            .field-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .registration-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-   <h2>Customer Registration</h2>
-{% if error %}<p style="color:red;">{{ error }}</p>{% endif %}
-<form method="post">
-  {% csrf_token %}
-  <input type="text" name="username" placeholder="Username" required><br>
-  <input type="email" name="email" placeholder="Email" required><br>
-  <input type="text" name="phone" placeholder="Phone"><br>
-  <input type="text" name="name" placeholder="Full Name" required><br>
-  <input type="text" name="state" placeholder="State"><br>
-  <input type="text" name="city" placeholder="City"><br>
-  <textarea name="address" placeholder="Address" required></textarea><br>
+    <div class="container">
+        <div class="registration-card">
+            <h2>Customer Registration</h2>
+            
+            {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+            {% endif %}
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="field-row">
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" placeholder="State">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="City">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter your full address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <div class="password-strength" id="password-strength"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+            
+            <div class="form-footer">
+                Already have an account? <a href="#">Sign In</a>
+            </div>
+        </div>
+    </div>
 
-  <input type="password" name="password" placeholder="Password" required><br>
-  <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
-
-  <button type="submit">Register</button>
-</form>
- 
+    <script>
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        const passwordStrength = document.getElementById('password-strength');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = '';
+            let strengthClass = '';
+            
+            if (password.length === 0) {
+                strength = '';
+            } else if (password.length < 6) {
+                strength = 'Weak';
+                strengthClass = 'strength-weak';
+            } else if (password.length < 10) {
+                strength = 'Medium';
+                strengthClass = 'strength-medium';
+            } else {
+                strength = 'Strong';
+                strengthClass = 'strength-strong';
+            }
+            
+            passwordStrength.textContent = strength;
+            passwordStrength.className = 'password-strength ' + strengthClass;
+        });
+        
+        // Form validation
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match. Please try again.');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
 </body>
 </html>
