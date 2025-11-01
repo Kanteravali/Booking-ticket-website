@@ -246,7 +246,8 @@ def bookings(request):
     dealer = Dealer.objects.get(user=request.user)
     # Get all bookings for those rooms
     dealer_rooms = HotelRoom.objects.filter(hotel__dealer=dealer)
-    bookings=Booking.objects.filter(hotel_room__in=dealer_rooms).select_related('hotel_room','user')
+    bookings = Booking.objects.filter(hotel_room__in=dealer_rooms).select_related('hotel_room', 'user')
+
     context = {
         'bookings': bookings
     }

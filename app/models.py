@@ -80,7 +80,7 @@ class Booking(models.Model):
     name=models.CharField()
     num_persons = models.PositiveIntegerField(default=1)
     address_proof = models.FileField(upload_to='address_proofs/')
-    bookig_id =models.ImageField(unique=True, editable=False)
+    booking_id =models.CharField(unique=True, editable=False)
 
     # auto generation for booking id which is uniqe 
     def save(self, *args, **kwargs):
