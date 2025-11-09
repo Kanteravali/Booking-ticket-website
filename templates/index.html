@@ -84,24 +84,28 @@
         }
 
         .auth-buttons button {
-            padding: 8px 20px;
-            border-radius: 4px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        .login-btn {
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-        }
+:root {
+    --grey-color: #777;
+    --light-grey: #999;
+    --dark-grey: #555;
+}
 
-        .signup-btn {
-            background: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            color: white;
-        }
+.login-btn {
+    background: transparent;
+    color: var(--grey-color);
+    border: 1px solid var(--grey-color);
+}
+
+.signup-btn {
+    background: var(--grey-color);
+    color: white;
+    border: 1px solid var(--grey-color);
+}
 
         .auth-buttons button:hover {
             opacity: 0.9;
@@ -499,18 +503,21 @@
             <div class="logo">
                 <h1>OYO<span>Hotels</span></h1>
             </div>
+           <!-- Add this after the nav-links in the header -->
             <div class="nav-links">
-                <a href="#">Hotels</a>
+                <a href="#" class="nav-active">Hotels</a>
+                <a href="{% url 'search_flights' %}">Flights</a>
                 <a href="#">Vacation Homes</a>
                 <a href="#">Resorts</a>
                 <a href="#">OYO Flagship</a>
                 <a href="#">OYO Wizard</a>
             </div>
-            <div class="auth-buttons" id="authButtons">
-              <a href="{% url 'rolelogin' %}" class="login-btn">Login</a>
+           <div class="auth-buttons" id="authButtons">
+    <a href="{% url 'rolelogin' %}" class="login-signup" style="text-decoration: none;">
+        <i class="fa-regular fa-user"></i> Login / Signup
+    </a>
+</div>
 
-                <button class="signup-btn" id="signupBtn">Sign Up</button>
-            </div>
             <div class="user-info" id="userInfo" style="display: none;">
                 <span id="userName">User</span>
                 <button class="logout-btn" id="logoutBtn">Logout</button>
@@ -719,7 +726,7 @@
                 return;
             }
             
-            alert(`Searching for hotels in ${destination} from ${checkin} to ${checkout} for ${guests}`);
+            alert(Searching for hotels in ${destination} from ${checkin} to ${checkout} for ${guests});
         });
         
         // Book Now Buttons
@@ -742,7 +749,7 @@
                 const checkoutDate = new Date(checkout);
                 const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
                 
-                alert(`Booking ${hotelName} from ${checkin} to ${checkout} (${nights} nights) for ${guests}. Total: ₹${pricePerNight * nights}`);
+                alert(Booking ${hotelName} from ${checkin} to ${checkout} (${nights} nights) for ${guests}. Total: ₹${pricePerNight * nights});
             });
         });
         
