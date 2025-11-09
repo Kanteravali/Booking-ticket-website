@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Hotel</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f8f9fa;
+        margin: 0;
+        padding: 30px;
+      }
+      form {
+        background: white;
+        max-width: 700px;
+        margin: auto;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+      .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .submit-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .submit-btn:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 style="text-align: center">Add Hotel</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      
+
+      <label>Hotel Name:</label>
+      <input type="text" name="name" required />
+
+      <label>Price:</label>
+      <input type="int" name="price" required />
+
+      <label>Location:</label>
+      <input type="text" name="location" required />
+
+      <label>Description:</label>
+      <textarea name="description" rows="4"></textarea>
+
+      <label>Floor Count:</label>
+      <input type="number" name="floor_count" min="1" value="1" />
+      <label>AC Room Count:</label>
+      <input type="number" name="ac_room_count" min="1" value="1" />
+      <label>Non ac Room  Count:</label>
+      <input type="number" name="non_ac_room_count" min="1" value="1" />
+      <label>Upload Image:</label>
+      <input type="file" name="hotel_image" accept="image/*" />
+
+      <h3>Facilities:</h3>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="has_wifi" /> Wi-Fi</label>
+        <label><input type="checkbox" name="has_parking" /> Parking</label>
+        <label><input type="checkbox" name="has_tv" /> TV</label>
+        <label
+          ><input type="checkbox" name="has_restaurant" /> Restaurant</label
+        >
+        <label><input type="checkbox" name="has_dining" /> Dining</label>
+        <label><input type="checkbox" name="has_elevator" /> Elevator</label>
+        <label><input type="checkbox" name="has_cctv" /> CCTV</label>
+        <label
+          ><input type="checkbox" name="has_room_service" /> Room Service</label
+        >
+        <label
+          ><input type="checkbox" name="has_swimming_pool" /> Swimming
+          Pool</label
+        >
+        <label><input type="checkbox" name="has_gym" /> Gym</label>
+      </div>
+
+      <label>Extra Amenities (comma separated):</label>
+      <input
+        type="text"
+        name="extra_amenities"
+        placeholder="e.g. Bar, Spa, Airport Shuttle"
+      />
+
+      <button type="submit" class="submit-btn">Add Hotel</button>
+    </form>
+  </body>
+</html>
